@@ -1,24 +1,42 @@
-{# This simple template derives from ``base.html``. See ``base.html`` for
-   more information about template inheritance. #}
-{%- extends "base.html" %}
-
-{# Loads some of the macros included with Flask-Bootstrap. We are using the
-   utils module here to automatically render Flask's flashed messages in a
-   bootstrap friendly manner #}
-{% import "bootstrap/utils.html" as utils %}
-
-
-{# Inside the ``content`` is where you should place most of your own stuff.
-   This will keep scripts at the page end and a navbar you add on later
-   intact. #}
+{% extends "layout.html" %}
 {% block content %}
-  <div class="container">
-    <div class="jumbotron">
-      <h1 style="text-align: center">BoxDrop!</h1>
-        <div class="row">
-            <div class="col-lg-6"><button type="button" class="btn btn-primary btn-lg btn-block">Klant</br><img src="static/customer.png" width="200" /></button></div>
-            <div class="col-lg-6"><button type="button" class="btn btn-primary btn-lg btn-block">Bezorger</br><img src="static/delivery.png" width="200" /></button></div>
-        </div>
-    </div>
-   </div>
-{%- endblock %}
+  <div class="container text-center">
+  <div class="centro">
+    <h1 class="display-5">Welkom bij ParcelSpot</h1>
+    <p class="lead">Houd u pakketje met de barcode omhoog onder de scanner om te beginnen</p>
+    <img src="./static/barcodescanning.gif">
+  </div>
+  </div>
+    <script>
+    $(document).ready(function() {
+    $.post("/scanbarcode", function (data, status) {
+        if(status === 'success' && data['status'] === 'done')
+        {
+            window.location.href = "/scanned/" + data['barcode']
+        }
+    });
+    })
+
+    {#var request = new XMLHttpRequest();#}
+    {#request.open('POST', '/scanbarcode');#}
+    {##}
+    {#request.onload = function() {#}
+    {#  if (request.status === 200 && request.responseText === 'done') {#}
+    {#      request.data =#}
+    {#    // long process finished successfully, redirect user#}
+    {#    window.location = '/scanned'#}
+    {##}
+    {#  } else {#}
+    {#    // ops, we got an error from the server#}
+    {#    alert('Something went wrong.');#}
+    {#  }#}
+    {#};#}
+    {##}
+    {#request.onerror = function() {#}
+    {#  // ops, we got an error trying to talk to the server#}
+    {#  alert('Something went wrong.');#}
+    {#};#}
+    {##}
+    {#request.send();#}
+    </script>
+{% endblock %}

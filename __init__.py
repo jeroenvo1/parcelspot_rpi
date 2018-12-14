@@ -1,5 +1,4 @@
 from flask import Flask
-from flask_bootstrap import Bootstrap
 from .frontend import frontend
 
 
@@ -9,9 +8,6 @@ def create_app(configfile=None):
     # http://flask.pocoo.org/docs/patterns/appfactories/
 
     app = Flask(__name__)
-
-    # Install our Bootstrap extension
-    Bootstrap(app)
 
     # Our application uses blueprints as well; these go well with the
     # application factory. We already imported the blueprint, now we just need
