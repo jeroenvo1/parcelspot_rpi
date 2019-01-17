@@ -8,7 +8,7 @@ def create_app(configfile=None):
     # http://flask.pocoo.org/docs/patterns/appfactories/
 
     app = Flask(__name__)
-
+    app.secret_key = "batteryhorsestapler"
     # Our application uses blueprints as well; these go well with the
     # application factory. We already imported the blueprint, now we just need
     # to register it:
