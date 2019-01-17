@@ -5,7 +5,7 @@
             <h5>Deze pakketjes staan voor je klaar om op te halen!</h5>
                 <div class="list-group">
                     {% for item in packages %}
-                    <button class="list-group-item list-group-item-action">{{item['description']}}</button>
+                      <a href="/pickupdetail/{{ item['id'] }}" class="list-group-item list-group-item-action" >{{item['description']}}</a>
                     {% endfor %}
                 </div>
         </div>

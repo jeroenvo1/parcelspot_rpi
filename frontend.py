@@ -15,8 +15,13 @@ def index():
 def pickup():
     headers = {'Authorization' : session['token']}
     req = requests.get("http://142.93.224.133/api/parcel/", headers=headers)
-
     return render_template('pickup.html', packages=req.json())
+
+@frontend.route('/pickupdetail/<id>')
+def pickupdetail(id):
+    headers = {'Authorization': session['token']}
+    req = requests.get("http://142.93.224.133/api/parcel/" + id, headers=headers)
+    return render_template('pickupdetail.html' ,package=req.json())
 
 @frontend.route('/scanned/', methods=['GET'])
 def scanned():
