@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
     <div class="container text-center">
-        <div class="centro">
+        <div class="centered-content">
 
             {% if session['barcode_type'] == 'QRCODE' and authorized == True %}
                 <h1 class="display-5">Hallo {{ session['user']['firstName'] }} </br>Maak een keuze</h1>

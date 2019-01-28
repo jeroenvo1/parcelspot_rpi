@@ -1,8 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
     <div class="container text-center">
-        <div class="centro">
-
+        <div class="centered-content">
             {% if send == False %}
                 <h5>Deze pakketjes staan voor je klaar om op te halen!</h5>
                 <div class="list-group">
@@ -25,7 +24,6 @@
                         {% endif %}
                     {% endfor %}
                 </div>
-
             {% endif %}
         </div>
     </div>
