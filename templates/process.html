@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="container text-center">
+        <div class="centro">
+
+            {% if send == False %}
+                <h5>Deze pakketjes staan voor je klaar om op te halen!</h5>
+                <div class="list-group">
+                    {% for item in packages %}
+                        {% if item.status|selectattr("type", "equalto", "delivered")|first %}
+                            <a href="/packagedetail/{{ item.id }}"
+                               class="list-group-item list-group-item-action">{{ item.description }}</a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% elif package %}
+                Wopper
+            {% else %}
+                <h5>Deze pakketjes zijn klaar om te verzenden!</h5>
+                <div class="list-group">
+                    {% for item in packages %}
+                        {% if item.status|selectattr("type", "equalto", "registered")|first %}
+                            <a href="/packagedetail/{{ item.id }}"
+                               class="list-group-item list-group-item-action">{{ item.description }}</a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

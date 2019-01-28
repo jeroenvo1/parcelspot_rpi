@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="container text-center">
+        <div class="centro">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ package['description'] }}</h5>
+                    <p class="card-text">
+                        <div>
+                            <div class="list-group-item text-left">Breedte: {{ package['width'] }} cm</div>
+                            <div class="list-group-item text-left">Lengte: {{ package['length'] }} cm</div>
+                            <div class="list-group-item text-left">Hoogte: {{ package['height'] }} cm</div>
+                        </div>
+                    </p>
+                    <a href="#" class="btn btn-primary">Open kluis {{ package['lockerId'] }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

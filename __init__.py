@@ -1,5 +1,5 @@
 from flask import Flask
-from .frontend import frontend
+from frontend import frontend
 
 
 def create_app(configfile=None):

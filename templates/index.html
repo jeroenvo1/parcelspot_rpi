@@ -1,20 +1,19 @@
 {% extends "layout.html" %}
 {% block content %}
-  <div class="container text-center">
-  <div class="centro">
-    <h1 class="display-5">Welkom bij ParcelSpot</h1>
-    <p class="lead">Houd de QR code die u heeft ontvangen omhoog onder de scanner om te beginnen</p>
-    <img src="./static/barcodescanning.gif">
-  </div>
-  </div>
+    <div class="container text-center">
+        <div class="centro">
+            <h1 class="display-5">Welkom bij ParcelSpot</h1>
+            <p class="lead">Houd de QR code die u heeft ontvangen omhoog onder de scanner om te beginnen</p>
+            <img src="./static/barcodescanning.gif">
+        </div>
+    </div>
     <script>
-    $(document).ready(function() {
-    $.post("/scanbarcode", function (data, status) {
-        if(status === 'success' && data['status'] === 'done')
-        {
-            window.location.href = "/scanned/"
-        }
-    });
-    })
+        $(document).ready(function () {
+            $.post("/scanbarcode", function (data, status) {
+                if (status === 'success' && data['status'] === 'done') {
+                    window.location.href = "/scanned/"
+                }
+            });
+        })
     </script>
 {% endblock %}
