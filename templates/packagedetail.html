@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="container text-center">
+        <div class="centered-content">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ package['description'] }}</h5>
+                    <p class="card-text">
+                    <div class="list-group">
+                        <div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">Breedte:  <small>{{ package['width'] }} cm</small></div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">Lengte:   <small>{{ package['length'] }} cm</small></div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">Hoogte:   <small>{{ package['height'] }} cm</small></div>
+                        </div>
+                    </div>
+                    </p>
+                    <a href="#" class="btn btn-primary">Open locker {{ package['lockerId'] }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

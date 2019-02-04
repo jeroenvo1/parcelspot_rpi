@@ -1,17 +1,28 @@
 {% extends "layout.html" %}
 {% block content %}
     <div class="container text-center">
-        <div class="centro">
+        <div class="centered-content">
 
-            {% if session['barcode_type'] == 'QRCODE' %}
+            {% if session['barcode_type'] == 'QRCODE' and authorized == True %}
                 <h1 class="display-5">Hallo {{ session['user']['firstName'] }} </br>Maak een keuze</h1>
                 <div class="list-group">
                     <a href="/pickup" class="list-group-item list-group-item-action">Ophalen</a>
-                    <a href="#" class="list-group-item list-group-item-action">Versturen</a>
+                    <a href="/send" class="list-group-item list-group-item-action">Versturen</a>
                 </div>
-            {% else %}
-                Hallo Bezorger Je flow doet het niet helaas :(
+            {% elif authorized == False %}
+                Er is iets niet zo goed gegaan
             {% endif %}
         </div>
     </div>
+    <script>
+        authorized = {{ authorized|tojson }}
+        $(document).ready(function () {
+            if(!authorized)
+            {
+                window.setTimeout(function () {
+                    window.location.href = "http://127.0.0.1:5000";
+                }, 5000);
+            }
+        })
+    </script>
 {% endblock %}

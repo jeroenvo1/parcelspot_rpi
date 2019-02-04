@@ -1,3 +1,5 @@
+import json
+
 from flask import Blueprint, render_template, flash, redirect, url_for, request, jsonify, session
 from imutils.video import VideoStream
 import requests
@@ -15,22 +17,41 @@ def index():
 def pickup():
     headers = {'Authorization' : session['token']}
     req = requests.get("http://142.93.224.133/api/parcel/", headers=headers)
-    return render_template('pickup.html', packages=req.json())
+    obj = json.loads(req.text)
+    return render_template('process.html', packages=obj, send=False)
 
-@frontend.route('/pickupdetail/<id>')
+@frontend.route('/send')
+def send():
+    headers = {'Authorization' : session['token']}
+    req = requests.get("http://142.93.224.133/api/parcel/", headers=headers)
+    obj = json.loads(req.text)
+    return render_template('process.html', packages=obj, send=True)
+
+@frontend.route('/packagedetail/<id>')
 def pickupdetail(id):
     headers = {'Authorization': session['token']}
     req = requests.get("http://142.93.224.133/api/parcel/" + id, headers=headers)
-    return render_template('pickupdetail.html' ,package=req.json())
+    return render_template('packagedetail.html', package=req.json())
 
 @frontend.route('/scanned/', methods=['GET'])
 def scanned():
     if(session['barcode_type'] == "QRCODE"):
         req = requests.get("http://142.93.224.133/api/login/" + session['barcode'])
-        session['user'] = req.json()['user']
-        session['token'] = req.json()['token']
 
-    return render_template('package.html')
+        if req.status_code == 201:
+            session['user'] = req.json()['user']
+            session['token'] = req.json()['token']
+            return render_template('package.html', authorized=True)
+        else:
+            return render_template('package.html', authorized=False)
+    else:
+
+        req = requests.get("http://142.93.224.133/api/parcel/" + session['barcode'])
+
+        if req.status_code == 201:
+            return render_template('process.html', package=req.json(), send=True)
+        else:
+            return render_template('index.html')
 
 @frontend.route('/openlocker/<id>')
 def openlocker(id):
