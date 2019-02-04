@@ -22,13 +22,7 @@
 # Commands in container
 # docker exec -it CONTAINER_ID /bin/bash
 
-# FROM python:2
-# FROM armhf/python:2.7
-# FROM arm64v8/python:3.7.2-stretch
 FROM mohaseeb/raspberrypi3-python-opencv:latest
-# FROM arm64v8/python:3
-# FROM resin/rpi-raspbian:wheezy
-# FROM arm32v7/python:2.7.13-jessie
 
 # Create app directory
 WORKDIR /app
