@@ -1,0 +1,13 @@
+language: python
+sudo: required
+node_js: 
+  - "stable"
+deploy:
+  skip_cleanup: true
+  provider: script
+  script:
+    - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+    - make build
+    - make push
+  on:
+    branch: master
