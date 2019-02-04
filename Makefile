@@ -18,7 +18,3 @@ build:
 push:
 	echo "$(GREEN)--- PUSHING IMAGE TO HUB ---$(NC)"
 	docker push $(REPO)/$(IMAGE):$(CURRENT)
-
-deploy-api:
-	echo "$(GREEN)--- DEPLOYING API TO SERVER ---$(NC)"
-	node operations/scripts/deploy.js --sshPassword $$SSH_PASSWORD --sshUser $$SSH_USER --tag $(CURRENT) --dockerUsername $$DOCKER_USERNAME --dockerPassword $$DOCKER_PASSWORD --image $(IMAGE) --port 8081:8081

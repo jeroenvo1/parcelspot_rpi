@@ -12,11 +12,12 @@
 # docker build -t jeroenvo/parcelspot-rpi .
 # docker run -d -p 5000:5000 --name parcelspot-rpi --rm jeroenvo/parcelspot-rpi
 # docker run -d -p 5000:5000 --name parcelspot-rpi --rm jeroenvo/parcelspot-rpi --device=/dev/video0:/dev/video0
+# docker run --device=/dev/video0:/dev/video0 -p 5000:5000 --name parcelspot-rpi --rm jeroenvo/parcelspot-rpi:test2
 
 # Docker hub
 # docker push jeroenvo/parcelspot-rpi:test1
 # docker pull jeroenvo/parcelspot-rpi:test1
-# docker run -d -p 5000:5000 --name parcelspot-rpi --rm jeroenvo/parcelspot-rpi:test1
+# docker run -d -p 5000:5000 --name parcelspot-rpi --rm jeroenvo/parcelspot-rpi:test2
 
 # Commands in container
 # docker exec -it CONTAINER_ID /bin/bash
