@@ -46,7 +46,7 @@ def scanned():
             return render_template('package.html', authorized=False)
     else:
 
-        req = requests.get("http://142.93.224.133/api/parcel/" + session['barcode'])
+        req = requests.get("http://142.93.224.133/api/parcel/delivery/" + session['barcode'])
 
         if req.status_code == 201:
             return render_template('process.html', package=req.json(), send=True)
@@ -55,7 +55,8 @@ def scanned():
 
 @frontend.route('/openlocker/<id>')
 def openlocker(id):
-    # DO Beautiful Things here to open the locker
+
+    # Do a call to  the ESP32
     return render_template('index.html')
 
 @frontend.route('/scanbarcode', methods=['GET','POST'])

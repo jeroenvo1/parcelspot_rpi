@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+     <a href="#" class="previous" onclick="history.back(-1)">&laquo;</a>
     <div class="container text-center">
         <div class="centered-content">
             {% if send == False %}
@@ -13,7 +14,12 @@
                     {% endfor %}
                 </div>
             {% elif package %}
-                Wopper
+                <div class="card" style="width: 18rem;">
+                 <h5 class="card-title" style="padding-top: 20px">Leg het pakketje in de aangewezen locker!</h5>
+                <div class="card-body">
+                        <a href="/openlocker/{{ package['id'] }}" class="btn btn-primary btn-lg">Open locker {{ package['id'] }}</a>
+                </div>
+                </div>
             {% else %}
                 <h5>Deze pakketjes zijn klaar om te verzenden!</h5>
                 <div class="list-group">
