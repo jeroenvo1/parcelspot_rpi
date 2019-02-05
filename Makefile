@@ -11,6 +11,8 @@ CURRENT=`echo $$TRAVIS_BRANCH | cut -d'/' -f 2-`-$$(git rev-parse HEAD | cut -c1
 GREEN=\033[0;32m
 NC=\033[0m
 
+docker: build push
+
 build:
 	echo "$(GREEN)--- BUILDING DOCKER IMAGE ---$(NC)"
 	docker build -t $(REPO)/$(IMAGE):$(CURRENT) .
