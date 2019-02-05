@@ -31,8 +31,8 @@ FROM mohaseeb/raspberrypi3-python-opencv:latest
 WORKDIR /app
 
 # Update ubuntu
-RUN apt-get update
-RUN apt-get upgrade -y
+# RUN apt-get update
+# RUN apt-get upgrade -y
 
 # Install ZBar
 RUN apt-get install zbar-tools -y
