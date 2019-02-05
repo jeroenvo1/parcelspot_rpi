@@ -1,7 +1,5 @@
-language: node_js
+language: bash
 sudo: required
-node_js: 
-  - "stable"
 script:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
   - make build
