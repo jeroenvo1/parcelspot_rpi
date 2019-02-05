@@ -11,6 +11,6 @@ script:
 deploy:
   skip_cleanup: true
   provider: script
-  script: docker
+  script: make docker
   on:
     branch: master
