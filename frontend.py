@@ -9,11 +9,7 @@ import cv2
 import time
 import serial
 
-ser = serial.Serial(
-    port='/dev/ttyACM0',
-    baudrate=115200
-)
-
+arduino = serial.Serial('dev/ttyACM0', 115200)
 frontend = Blueprint('frontend', __name__)
 
 @frontend.route('/')
@@ -39,6 +35,7 @@ def send():
 def pickupdetail(id):
     headers = {'Authorization': session['token']}
     req = requests.get("http://142.93.224.133/api/parcel/" + id, headers=headers)
+    session['parcelId'] = id
     return render_template('packagedetail.html', package=req.json())
 
 @frontend.route('/scanned/', methods=['GET'])
@@ -59,6 +56,7 @@ def scanned():
         # Fetch a parcel that's associated with te barcode if we can find it
         req = requests.get("http://142.93.224.133/api/parcel/delivery/" + session['barcode'])
         if req.status_code == 201:
+            session['parcelId'] = req.json()['id']
             return render_template('process.html', package=req.json(), send=True)
         else:
             return render_template('index.html')
@@ -66,12 +64,25 @@ def scanned():
 @frontend.route('/openlocker/<id>')
 def openlocker(id):
 
-    # Lampje aanzetten
-    for i in range(2000):
-        ser.write(id)
+    # Lampje uitzetten
+    time.sleep(2)
+    arduino.write(bytes(id))
+    payload = { 'parcelId': session['parcelId'], 'status': 'picked up' }
+    req = requests.post("http://142.93.224.133/api/parcel/status/", data=payload)
 
-    # Do a call to  the ESP32
     return render_template('index.html')
+
+@frontend.route('/delivery/<id>')
+def delivery(id):
+
+    # Lampje aanzetten
+    time.sleep(2)
+    arduino.write(bytes(id))
+    payload = { 'parcelId': session['parcelId'], 'status': 'delivered' }
+    req = requests.post("http://142.93.224.133/api/parcel/status/", data=payload)
+
+    return render_template('index.html')
+
 
 @frontend.route('/scanbarcode', methods=['GET','POST'])
 def barcode():
