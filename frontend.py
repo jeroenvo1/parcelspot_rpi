@@ -20,8 +20,7 @@ def index():
 def pickup():
     headers = {'Authorization' : session['token']}
     req = requests.get("http://142.93.224.133/api/parcel/", headers=headers)
-    obj = json.loads(req.text)
-    return render_template('process.html', packages=obj, send=False)
+    return render_template('process.html', packages=req.json(), send=False)
 
 @frontend.route('/send')
 def send():
@@ -75,7 +74,7 @@ def openlocker(id):
 @frontend.route('/delivery/<id>')
 def delivery(id):
 
-    # Lampje aanzetten
+    #Lampje aanzetten
     time.sleep(2)
     arduino.write(bytes(id))
     payload = { 'parcelId': session['parcelId'], 'status': 'delivered' }
