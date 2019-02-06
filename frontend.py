@@ -9,7 +9,7 @@ import cv2
 import time
 import serial
 
-arduino = serial.Serial('dev/ttyACM0', 115200)
+arduino = serial.Serial('/dev/ttyACM0', 115200)
 frontend = Blueprint('frontend', __name__)
 
 @frontend.route('/')
