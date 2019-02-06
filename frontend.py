@@ -68,7 +68,7 @@ def openlocker(id):
 
     # Lampje aanzetten
     for i in range(2000):
-        ser.write(id)
+        ser.write(bytes(id))
 
     # Do a call to  the ESP32
     return render_template('index.html')
