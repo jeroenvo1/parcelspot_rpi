@@ -15,7 +15,7 @@ Jinja2==2.10
 MarkupSafe==1.1.0
 numpy==1.15.4
 pathlib==1.0.1
-PyYAML==3.13
+PyYAML==5.4
 pyzbar==0.1.7
 requests==2.21.0
 pyserial==3.4
