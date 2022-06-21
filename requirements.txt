@@ -13,7 +13,7 @@ iso8601==0.1.12
 itsdangerous==1.1.0
 Jinja2==2.10
 MarkupSafe==1.1.0
-numpy==1.15.4
+numpy==1.22.0
 pathlib==1.0.1
 PyYAML==3.13
 pyzbar==0.1.7
